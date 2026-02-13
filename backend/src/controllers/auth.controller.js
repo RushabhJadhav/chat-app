@@ -14,11 +14,11 @@ export const signup = async (req, res) => {
             return res.status(400).json({message: "Password must be at least 6 characters"});
         }
 
-        const user = await User.find({email});
+        const user = await User.findOne({email});
 
         if(user) return res.status(400).json({message: "mail already exists"});
 
-        const salt = bcrypt.getSalt(10);
+        const salt = await bcrypt.genSalt (10);
 
         const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -29,12 +29,12 @@ export const signup = async (req, res) => {
         });
 
         if (newUser) {
-            generateToken(newUser._id, res);
             await newUser.save();
+            generateToken(newUser._id, res);
 
             res.status(201).json({
-                _id: newUser.id,
-                fullName: newUser.fullname,
+                _id: newUser._id,
+                fullName: newUser.fullName,
                 email: newUser.email,
                 profilePic: newUser.profilePic,
             });
