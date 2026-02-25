@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useAuthStore } from '../store/useAuthStore';
-import { MessageSquareIcon } from "lucide-react";
+import { MessageSquareIcon, UserIcon } from "lucide-react";
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -29,6 +29,26 @@ const SignUpPage = () => {
           <p className="text-base-content/60">Get started with your free account</p>
         </div>
       </div>
+
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="from-control">
+          <label className="label">
+            <span className="label-text font-medium">Full Name</span>
+          </label>
+          <div className="relative">
+            <div className="absolute inset-0 left-0 pl-3 flex items-center pointer-events-none">
+              <UserIcon className="size-5 text-base-content/40" />
+            </div>
+            <input 
+              type="text"
+              className={`input input-bordered w-full pl-10`}
+              placeholder="John Doe"
+              value={formData.fullName}
+              onChange={(e) => setFormData({...formData, fullName: e.target.value})} 
+            />
+          </div>
+        </div>
+      </form>
     </div>
   )
 };
