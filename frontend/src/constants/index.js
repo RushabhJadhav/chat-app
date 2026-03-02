@@ -1,4 +1,4 @@
-export const themes = [
+export const THEMES = [
   "light",
   "dark",
   "cupcake",
