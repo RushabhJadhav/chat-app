@@ -36,8 +36,8 @@ export const getMessage = async (req, res) => {
 export const sendMessage = async (req, res) => {
     try {
         const { text, image } = req.body;
-        const { id: receiverId} = req.params;
-        const { senderId } = req.userId;
+        const { id: receiverId } = req.params;
+        const senderId = req.user._id;
 
         let imageUrl;
         if(image) {
@@ -45,7 +45,7 @@ export const sendMessage = async (req, res) => {
             imageUrl = uploadResponse.secure_url;
         }
 
-        const newMessage = newMessage({
+        const newMessage = new Message({
             senderId,
             receiverId,
             text,
