@@ -17,7 +17,7 @@ export const useChatStore = create((set) => ({
       console.log(error);
       toast.error(error.resonse.data.message);
     } finally {
-      set({ isUsersLoading: true });
+      set({ isUsersLoading: false });
     }
   },
   getMessages: async (userId) => {
@@ -31,5 +31,6 @@ export const useChatStore = create((set) => ({
     } finally {
       set({ isUsersLoading: false });
     }
-  }
+  },
+  setSelectedUser: async (selectedUser) => set({ selectedUser })
 }));
