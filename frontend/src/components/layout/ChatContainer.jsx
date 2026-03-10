@@ -7,13 +7,17 @@ import MessageSkeleton from "../skeletons/MessageSkeleton";
 import { formatMessageTime } from '../../lib/utils';
 
 const ChatContainer = () => {
-  const { messages, getMessages, isMessagesLoading, selectedUser } = useChatStore();
+  const { messages, getMessages, isMessagesLoading, selectedUser, subscribeToMessages, unsubscribeToMessages } = useChatStore();
 
   const { authUser } = useAuthStore();
 
   useEffect(() => {
     getMessages(selectedUser._id);
-  }, [selectedUser.id, getMessages]);
+
+    subscribeToMessages();
+
+    return () => unsubscribeToMessages();
+  }, [selectedUser.id, getMessages, subscribeToMessages, unsubscribeToMessages]);
 
   if (isMessagesLoading) {
     return (
