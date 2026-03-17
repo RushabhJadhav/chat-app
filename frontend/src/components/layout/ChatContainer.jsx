@@ -19,7 +19,7 @@ const ChatContainer = () => {
     subscribeToMessages();
 
     return () => unsubscribeToMessages();
-  }, [selectedUser.id, getMessages, subscribeToMessages, unsubscribeToMessages]);
+  }, [selectedUser, getMessages, subscribeToMessages, unsubscribeToMessages]);
 
   useEffect(() => {
     if(messageEndRef.current && messages)
@@ -69,7 +69,7 @@ const ChatContainer = () => {
                 <img
                   src={message.image}
                   alt="Attachment"
-                  className="sm:max-w-[200px] rounded-md mb-2" 
+                  className="sm:max-w-50 rounded-md mb-2" 
                 />
               )}
               {message.text && <p>{message.text}</p>}
